@@ -1,10 +1,13 @@
 package my.test.rest.ws.core;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -45,6 +48,7 @@ public class WsFacadeV1 {
 	
 	@GET
 	@Path("/user/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUser(@PathParam("id") final String id) {
 		try {
 			MyUserPOJO user = userService.getUser(id);
@@ -55,6 +59,16 @@ public class WsFacadeV1 {
 			e.printStackTrace();
 			return getAppError(e.getMessage());
 		}
+	}
+	
+	
+	@POST
+	@Path("/newuser")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String newUser(MultivaluedMap<String, String> formData) {
+		
+		return "form data: " + formData;
 	}
 	
 	@GET
