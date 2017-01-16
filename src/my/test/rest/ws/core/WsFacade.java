@@ -45,7 +45,7 @@ public class WsFacade {
 	
 	@GET
 	@Path("/user/{id}")
-	public Response getUser(@PathParam("id") String id) {
+	public Response getUser(@PathParam("id") final String id) {
 		try {
 			MyUserPOJO user = userService.getUser(id);
 			String response = mapper.writeValueAsString(user);
