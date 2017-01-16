@@ -12,7 +12,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import my.test.rest.ws.core.domain.MyUserPOJO;
 
 @Path("/v1")
-public class WsFacade {
+public class WsFacadeV1 {
 
 	private UserService userService = new UserService();
 	private ObjectMapper mapper = new ObjectMapper();
