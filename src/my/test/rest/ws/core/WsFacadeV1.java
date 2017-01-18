@@ -1,11 +1,16 @@
 package my.test.rest.ws.core;
 
+import java.net.URI;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -42,12 +47,18 @@ public class WsFacadeV1 {
 		
 	}
 	
+	private Response getCreated(final String uri, final String data) throws Exception {
+		return Response.created(new URI(uri)).entity(data).build();
+		
+	}
+	
+	
 	private Response getAppError(final String data) {
 		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(data).build();
 	}
 	
 	@GET
-	@Path("/user/{id}")
+	@Path("/users/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUser(@PathParam("id") final String id) {
 		try {
@@ -63,13 +74,23 @@ public class WsFacadeV1 {
 	
 	
 	@POST
-	@Path("/newuser")
+	@Path("/users")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String newUser(MultivaluedMap<String, String> formData) {
+	public Response newUser(MultivaluedMap<String, String> formData, @Context HttpServletRequest request) throws Exception {
 		
-		return "form data: " + formData;
+		return getCreated(request.getRequestURI() + "/12345", "New User has been created. User data: " + formData);
 	}
+	
+	@PUT
+	@Path("/users/{username}")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response updateUser(@PathParam("username") final String userName, MultivaluedMap<String, String> formData) {
+	
+		return getOk("User " + userName + " has been updated. User data :" + formData);
+	}
+	
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)

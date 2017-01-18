@@ -8,25 +8,25 @@
 </head>
 <body>
 
-New User:
+Edit User:
 <br>
-<form name="frmNewUser" method="POST" action="api/v1/newuser">
+<form name="frmNewUser" method="POST" action="api/v1/newuser/testuser1">
 
 <table>
 	<tr>
-		<td>User name</td><td><input name="userName"></td>
+		<td>User name</td><td><input name="userName" value="testuser1"></td>
 	</tr>
 
 	<tr>
-		<td>First Name</td><td><input name="firstName"></td>
+		<td>First Name</td><td><input name="firstName" value="Test"></td>
 	</tr>
 	
 	<tr>
-		<td>Last Name</td><td><input name="lastName"></td>
+		<td>Last Name</td><td><input name="lastName" value="User1"></td>
 	</tr>
 	
 	<tr>
-		<td>&nbsp;</td><td><input type="submit" value="Create New User"></td>
+		<td>&nbsp;</td><td><input type="submit" value="Update"></td>
 	</tr>
 </table>
 

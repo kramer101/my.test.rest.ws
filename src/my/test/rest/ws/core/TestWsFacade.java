@@ -16,12 +16,13 @@ public class TestWsFacade extends JerseyTest {
 	
 	@Override
 	protected Application configure() {
-		return new ResourceConfig(WsApplication.class);
+		return new ResourceConfig(WsFacadeV1.class);
 	}
+	
 	@Test
 	public void testGetUsers() {
 	
-		WebTarget target = target("/api/v1/users");
+		WebTarget target = target("/v1/users");
 		
 		Builder request = target.request();
 		
@@ -31,6 +32,7 @@ public class TestWsFacade extends JerseyTest {
 		
 		int status = response.getStatus();
 		Assert.assertTrue(status == Status.OK.getStatusCode()); 
+		
 				
 	}
 }
