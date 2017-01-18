@@ -23,7 +23,7 @@ import my.test.rest.ws.core.domain.MyUserPOJO;
 public class WsFacadeV1 {
 
 	private UserService userService = new UserService();
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper jsonMapper = new ObjectMapper();
 	
 	@GET
 	@Path("/users")
@@ -32,7 +32,7 @@ public class WsFacadeV1 {
 	
 		try {
 			
-			String response = mapper.writeValueAsString(userService.getAllUsers());
+			String response = jsonMapper.writeValueAsString(userService.getAllUsers());
 			return getOk(response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class WsFacadeV1 {
 	public Response getUser(@PathParam("id") final String id) {
 		try {
 			MyUserPOJO user = userService.getUser(id);
-			String response = mapper.writeValueAsString(user);
+			String response = jsonMapper.writeValueAsString(user);
 			
 			return getOk(response);
 		} catch (Exception e) {
